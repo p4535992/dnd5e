@@ -759,29 +759,38 @@
   /* ----------------------------------------- */
 
   .addar.attribute.resource {
-    position: relative;
-    a.delete-resource.config-button {
-      position: absolute;
-      padding: 4px;
-      right: 0;
-      top: 0;
-      display: none;
-    }
-    &:hover {
-      a.delete-resource.config-button {
-        display: block;
+      position: relative;
+      [data-action="delete-resource"] {
+        position: absolute;
+        padding: 4px;
+        right: 0;
+        top: 0;
+        display: none;
       }
-    }
-    }
-    a.addar.add-resource {
-    max-width: fit-content;
+      &:hover {
+        [data-action="delete-resource"] {
+          display: block;
+        }
+      }
+  }
+  .addar[data-action="add-resource"] {
     display: flex;
     align-items: center;
-    }
+    min-width: 100%;
+    justify-content: center;
+    border: 2px groove;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1px;
+    order: -5;
+  }
   
-    ul.attributes li.attribute.resource {
-      min-width: 115px;
-    }
+  .center-pane ul.attributes li.attribute.resource {
+    min-width: 115px;
+    margin: 0;
+  }
+  /* input[type="text"][name^="system.resources"]  {
+    max-width: calc(100% - 1em);
+  } */
 }
 
 #actor-flags {

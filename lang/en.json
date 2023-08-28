@@ -1235,6 +1235,7 @@
 "DND5E.addResource": "Add new resource",
 "DND5E.deleteResource": "Delete this resource",
 "DND5E.customResource": "Custom Resource",
+"DND5E.cannotDeleteBaseResource": "Cannot delete this resource",
 
 "JOURNALENTRYPAGE.TypeClass": "Class Summary",
 "TYPES.JournalEntryPage.class": "Class Summary",

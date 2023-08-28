@@ -834,6 +834,12 @@ export default class Item5e extends Item {
     }
     if ( isSpell ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
+    // Feature: Resource Link
+    if (options.consumeResource && item.system.consume.target && item.system.resourceLink) {
+      options.consumeResource = false;
+      options.consumeCustomResource = item.system.consume.target;
+    }
+
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
      * @function dnd5e.preItemUsageConsumption
@@ -848,6 +854,21 @@ export default class Item5e extends Item {
     // Determine whether the item can be used by testing for resource consumption
     const usage = item._getUsageUpdates(config);
     if ( !usage ) return;
+
+    // Feature: Resource Link
+    const nameConsumeResource = options.consumeCustomResource;
+    if (nameConsumeResource) {
+      const newValue = foundry.utils.getProperty(item.actor, nameConsumeResource) - (item.system.consume.amount || 1);
+      if (newValue < 0) {
+        ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {
+          name: item.name,
+          type: CONFIG.DND5E.abilityConsumptionTypes[item.system.consume.type]
+        }));
+      }
+      else {
+        usage.actorUpdates[nameConsumeResource] = newValue;
+      }
+    }
 
     /**
      * A hook event that fires after an item's resource consumption has been calculated but before any

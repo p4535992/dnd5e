@@ -470,6 +470,10 @@ export default class ItemSheet5e extends ItemSheet {
       });
     }
 
+    // TODO Check if we really need this ???
+    // Feature: Resource Link
+    //  this._addAbilityToUseNewResourcesAsConsumption(this.item, html);
+
     // Advancement context menu
     const contextOptions = this._getAdvancementContextMenuOptions();
     /**
@@ -482,6 +486,26 @@ export default class ItemSheet5e extends ItemSheet {
     Hooks.call("dnd5e.getItemAdvancementContext", html, contextOptions);
     if ( contextOptions ) new ContextMenu(html, ".advancement-item", contextOptions);
   }
+
+  /* -------------------------------------------- */
+
+  // _addAbilityToUseNewResourcesAsConsumption(item, html) {
+  //   const actor = item.actor;
+  //   const ids = Object.keys(actor.system.resources ?? {});
+  //   if (ids.length) {
+  //     const selected = sheet.item.system.consume.target;
+  //     const options = ids.reduce((acc, id) => {
+  //       const label = actor.system.resources[id].label || game.i18n.localize("ADDAR.Resource");
+  //       const value = actor.system.resources[id].value;
+  //       const s = (value === selected) ? "selected" : "";
+  //       return acc + `<option value="${value}" ${s}>${label}</option>`;
+  //     }, "<option value=''></option>");
+  //     const tar = html[0].querySelector("[name='system.consume.target']");
+  //     if (tar) {
+  //       tar.innerHTML = options;
+  //     }
+  //   }
+  // } 
 
   /* -------------------------------------------- */
 

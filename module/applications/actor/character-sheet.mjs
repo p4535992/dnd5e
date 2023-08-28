@@ -257,52 +257,41 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
     }
 
-    const boxAddResource = html[0].querySelector("form > .sheet-body > .tab.attributes.flexrow > .center-pane.flexcol > .attributes.flexrow");
-    const divAddResource = document.createElement("DIV");
-    const data = Object.entries(this.object.system.resources ?? {});
-    for (const [id, vals] of data) {
-      const inner = this._addResource(id, vals);
-      if (!inner) {
-        continue;
-      }
-      divAddResource.innerHTML = inner;
-      const res = boxAddResource.appendChild(divAddResource.firstElementChild);
-      res.querySelector("[data-id]").addEventListener("click", async (event) => {
-        if(Object.keys(CONFIG.DND5E.resourceOptions).includes(event.currentTarget.dataset.id)){
-            // Can't delete original resources
-            return;
+    // const box = html[0].querySelector(".dnd5e.sheet.actor .center-pane ul.attributes");
+
+    html[0].querySelectorAll("[data-action='delete-resource']").forEach(trash => {
+      trash.addEventListener("click", (event) => {
+        const resourceIdToDelete = event.currentTarget.closest("[data-id]");
+        if(resourceIdToDelete && this.object.system.resources[resourceIdToDelete]) {
+          if(!Object.keys(CONFIG.DND5E.resourceOptions).includes(resourceIdToDelete)) {
+            delete this.object.system.resources[resourceIdToDelete]
+          } else {
+            ui.notifications.warn(game.i18n.localize(`DND5E.cannotDeleteBaseResource`));
+          }
         }
-        delete this.object.system.resources[event.currentTarget.dataset.id];
       });
-    }
-
-    divAddResource.innerHTML = `<a class="addar add-resource" data-tooltip="DND5E.addResource"><i class="fa-solid fa-plus"></i></a>`;
-    const addResource = boxAddResource.appendChild(divAddResource.firstElementChild);
-    addResource.addEventListener("click", async (event) => {
-       this.object.system.resources[foundry.utils.randomID()] = {};
     });
-  }
+  
+    html[0].querySelector("[data-action='add-resource']").addEventListener("click", () => {
+      this.object.system.resources[foundry.utils.randomID()] = {};
+    });
 
-  _addResource(key, data) {
-    if (!key) {
-        return false;
-    }
+    // html[0].querySelectorAll("input[type='text'][data-dtype='Number']").forEach(input => {
+    //   input.addEventListener("change", this._onChangeInputDelta.bind(this));
+    // });
 
-    const name = this.system.resources[key];
-    const newName = name ? name : game.i18n.localize("DND5E.resource");
-
-    const props = {
-      label: foundry.utils.getProperty(data, "label") ?? "",
-      sr: !!foundry.utils.getProperty(data, "sr"),
-      lr: !!foundry.utils.getProperty(data, "lr"),
-      value: foundry.utils.getProperty(data, "value") ?? "",
-      max: foundry.utils.getProperty(data, "max") ?? "",
-      name: newName,
-      id: key
-    };
-
-    const template = "systems/dnd5e/templates/actors/actor-add-new-resource.hbs";
-    return renderTemplate(template, props);
+    // const foc = div.querySelector(`[name="${sheet._addarFocus}"]`);
+    // box.append(...div.children);
+    // if (foc && this._addarFocus.includes("addar")) {
+    //   foc.focus();
+    // }
+    
+    // html[0].querySelectorAll("input").forEach(input => input.addEventListener("focus", (event) => {
+    //   this._addarFocus = event.currentTarget.name;
+    //   if (event.currentTarget.closest(".addar")) {
+    //     event.currentTarget.select();
+    //   }
+    // }));
   }
 
   /* -------------------------------------------- */

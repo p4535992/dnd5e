@@ -1365,24 +1365,33 @@ h5 {
 .dnd5e.sheet.actor .addar.attribute.resource {
   position: relative;
 }
-.dnd5e.sheet.actor .addar.attribute.resource a.delete-resource.config-button {
+.dnd5e.sheet.actor .addar.attribute.resource [data-action="delete-resource"] {
   position: absolute;
   padding: 4px;
   right: 0;
   top: 0;
   display: none;
 }
-.dnd5e.sheet.actor .addar.attribute.resource:hover a.delete-resource.config-button {
+.dnd5e.sheet.actor .addar.attribute.resource:hover [data-action="delete-resource"] {
   display: block;
 }
-.dnd5e.sheet.actor a.addar.add-resource {
-  max-width: fit-content;
+.dnd5e.sheet.actor .addar[data-action="add-resource"] {
   display: flex;
   align-items: center;
+  min-width: 100%;
+  justify-content: center;
+  border: 2px groove;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px;
+  order: -5;
 }
-.dnd5e.sheet.actor ul.attributes li.attribute.resource {
+.dnd5e.sheet.actor .center-pane ul.attributes li.attribute.resource {
   min-width: 115px;
+  margin: 0;
 }
+/* input[type="text"][name^="system.resources"]  {
+  max-width: calc(100% - 1em);
+} */
 #actor-flags .window-content {
   overflow-y: hidden;
 }

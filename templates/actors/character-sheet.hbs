@@ -209,11 +209,14 @@
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow">
                     {{#each resources as |res|}}
-                    <li class="attribute resource">
+                    <li class="addar attribute resource">
                         <h4 class="attribute-name box-title">
                             <input name="system.resources.{{res.name}}.label" type="text" value="{{res.label}}"
                                    placeholder="{{res.placeholder}}" />
                         </h4>
+                        <a class="delete-resource config-button" data-action="delete-resource" data-id="{{id}}" data-tooltip="DND5E.deleteResource">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
                         <div class="attribute-value">
                             <label class="recharge checkbox flexcol">
                                 <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
@@ -227,6 +230,9 @@
                         </div>
                     </li>
                     {{/each}}
+                    <a class="addar" data-action="add-resource" data-tooltip="DND5E.addResource">
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
                 </ul>
 
                 {{!-- Counters --}}
