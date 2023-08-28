@@ -27,6 +27,7 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @property {number} strength          Minimum strength required to use a piece of armor.
  * @property {boolean} stealth          Does this equipment grant disadvantage on stealth checks when used?
  * @property {number} proficient        Does the owner have proficiency in this piece of equipment?
+ * @property {string} resourceLink Linked resources to the item.
  */
 export default class EquipmentData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate,
@@ -53,6 +54,9 @@ export default class EquipmentData extends SystemDataModel.mixin(
       stealth: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemEquipmentStealthDisav"}),
       proficient: new foundry.data.fields.NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
+      }),
+      resourceLink: new foundry.data.fields.StringField({
+        required: false, initial: "", label: "DND5E.resourceLink"
       })
     });
   }

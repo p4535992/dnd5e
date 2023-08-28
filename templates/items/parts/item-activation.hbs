@@ -133,12 +133,32 @@
     </div>
 </div>
 
+{{#if isResourceLinkHasLimitedUses}}
+<div class="form-group">
+    <label>{{localize "DND5E.resourceLink"}}</label>
+    <select name="system.resourceLink">
+        <!--<option value=""><em>No Override</em></option>-->
+        {{selectOptions resourceLinkResourceOptions selected=resourceLinkCurrentValue blank=""}}
+    </select>
+</div>
+{{/if}}
+
 {{#if (eq system.uses.per "charges")}}
 <div class="form-group">
     <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
         <input type="text" name="system.uses.recovery" value="{{system.uses.recovery}}" data-formula-editor>
     </div>
+</div>
+{{/if}}
+
+{{#if isResourceLinkIsSelfConsumingAmmo}}
+<div class="form-group">
+    <label>{{localize "DND5E.resourceLink"}}</label>
+    <select name="system.resourceLink">
+        <!--<option value=""><em>No Override</em></option>-->
+        {{selectOptions resourceLinkResourceOptions selected=resourceLinkCurrentValue blank=""}}
+    </select>
 </div>
 {{/if}}
 

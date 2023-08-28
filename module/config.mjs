@@ -791,6 +791,19 @@ DND5E.focusTypes = {
 /* -------------------------------------------- */
 
 /**
+ * Enumerate the valid consumable types which are recognized by the system.
+ * @enum {string}
+ */
+DND5E.resourceOptions = {
+  primary: "DND5E.ResourcePrimary",
+  secondary: "DND5E.ResourceSecondary",
+  tertiary: "DND5E.ResourceTertiary"
+};
+preLocalize("resourceOptions");
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for an item with the "feature" type.
  *
  * @typedef {object} FeatureTypeConfiguration

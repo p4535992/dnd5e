@@ -20,6 +20,7 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @property {string} baseItem     Base weapon as defined in `DND5E.weaponIds` for determining proficiency.
  * @property {object} properties   Mapping of various weapon property booleans.
  * @property {number} proficient   Does the weapon's owner have proficiency?
+ * @property {string} resourceLink Linked resources to the item.
  */
 export default class WeaponData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate,
@@ -37,6 +38,9 @@ export default class WeaponData extends SystemDataModel.mixin(
       }),
       proficient: new foundry.data.fields.NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
+      }),
+      resourceLink: new foundry.data.fields.StringField({
+        required: false, initial: "", label: "DND5E.resourceLink"
       })
     });
   }
